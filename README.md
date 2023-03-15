@@ -1,7 +1,9 @@
 # LAMP-app
 
 ---
-**OBS! filen `app/public/cms-config-template.php` ska ändras till `app/public/cms-config.php`.**
+
+**OBS!** Ändra namnet på filen `app/public/cms-config-template.php` till `app/public/cms-config.php`. Se instruktioner nedan.
+
 ---
 
 
