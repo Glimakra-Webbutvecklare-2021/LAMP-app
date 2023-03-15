@@ -1,5 +1,10 @@
 # LAMP-app
 
+---
+**OBS! filen `app/public/cms-config-template.php` ska ändras till `app/public/cms-config.php`.**
+---
+
+
 Gitrepot är ett startprojekt baserad på en LAMP-stack - Linux, Apache, MySQL (MariaDB), PHP. Projektet kan användas i en inledande fas för att koda ett projekt som (https://github.com/Glimakra-Webbutvecklare-2021/case-fullstack-php).
 
 
