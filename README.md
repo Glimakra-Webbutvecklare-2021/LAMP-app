@@ -50,6 +50,7 @@ project
 │   │   │   │   └── header.php
 │   │   │   ├── global-functions.php
 │   │   │   └── .htaccess
+│   │   └── cms-config-template.php 
 │   │   └── cms-config.php
 │   │   └── index.php
 │   │   └── sample.php
@@ -276,9 +277,11 @@ Den tomma databasen är redo!
 ![index.php](screenshots/linode-12.png)
 
 
-Inställningar som handlar om databasen i installationsfasen ovans ska sedan anges i `cms-include.php`. Se variabler under *production*.
+Inställningar som handlar om databasen i installationsfasen ovan ska sedan anges i `cms-config.php`. Se variabler under *production*.
 
 Med ett villkor anges vilka databasvariabler som ska vara gällande. Kontrollen använder `$_SERVER['SERVER_NAME']`. Om url:en innehåller `localhost` används namnen som återfinns i `docker-compose-yml`.
+
+Kopiera filen `cms-config-template.php` till en ny fil med namnet `cms-config.php`. Ange inställningar som gäller för *production*
 
 ```php
 // auto set database server 
