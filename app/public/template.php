@@ -3,6 +3,10 @@ declare(strict_types=1);
 include_once 'cms-config.php';
 include_once ROOT . '/cms-includes/global-functions.php';
 include_once ROOT . '/cms-includes/models/Database.php';
+include_once ROOT . '/cms-includes/models/Template.php';
+
+// use Temmplate
+$template = new Template();
 
 $title = "Template";
 
@@ -27,6 +31,9 @@ $title = "Template";
     <?php
 
     new DisplayDBVersion();
+
+    // use setup method - create table
+    $result = $template->setup();
 
     ?>
 
