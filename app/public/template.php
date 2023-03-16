@@ -80,6 +80,16 @@ $title = "Template";
     // PDO metod prepare()
     // se klassen Template.php
 
+
+    // använd metoden insertOne()
+    // $result = $template->insertOne('Gotland är en ö', 4);
+    // print_r2($result);
+
+    // testa att skicka parametrar i annan ordning
+    $result = $template->insertOne('Skåne ligger söderut', 3);
+    print_r2($result);
+
+
     $result = $template->selectAll();
     print_r2($result);
 

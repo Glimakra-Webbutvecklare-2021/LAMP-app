@@ -31,13 +31,22 @@ class Template extends Database
     // funktion för att lägga till data i tabellen
     public function insertOne($information, $position)
     {
-        $sql = "INSERT INTO template (information, position) VALUES (:information, :position)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':information', $information, PDO::PARAM_STR);
-        $stmt->bindValue(':position', $position, PDO::PARAM_INT);
-        $stmt->execute();
 
-        return $this->db->lastInsertId();
+        try {
+            //code...
+            $sql = "INSERT INTO template (information, position) VALUES (:information, :position)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':information', $information, PDO::PARAM_STR);
+            $stmt->bindValue(':position', $position, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $this->db->lastInsertId();
+    
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 
 
