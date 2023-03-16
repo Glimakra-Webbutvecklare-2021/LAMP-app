@@ -382,6 +382,21 @@ Nu har du en lokal Docker miljö för utveckling. Produktionsmiljön uppdaterar 
 Skapa en klass för en ny resurs.
 SELCET, INSERT, UPDATE, DELETE
 
+Om möjligt använde placeholders för variabler i en sql syntax.
+Se upp med SQL injection..."Bobby tables"
+
+```sql
+    $dsn = "mysql:host=". DB_HOST .";dbname=". DB_NAME;
+    $pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
+
+     $value = "4; DROP TABLE template";
+     $sql = "SELECT * FROM template WHERE id = " . $value;
+    $stmt = $pdo->query($sql);
+    // ...
+```
+
+![Bobby tables](screenshots/bobby-tables.png);
+
 ## Backup
 
 Följande kommando i terminalen visar containers: `docker ps`.
