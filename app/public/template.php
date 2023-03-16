@@ -5,13 +5,37 @@ include_once ROOT . '/cms-includes/global-functions.php';
 include_once ROOT . '/cms-includes/models/Database.php';
 include_once ROOT . '/cms-includes/models/Template.php';
 
+
+// use Temmplate
+$template = new Template();
+
+// default values
+$information = "";
+$position = 5;
+
+// hantera ev POST request
+if ($_POST) {
+    print_r2($_POST);
+
+    //  använd $template för att uppdatera tabellen
+
+    // kolla att informationen är ett visst antal tecken innan den sparas
+    $information = $_POST['information'];
+
+    // ev dubbelkolla att värdet är ok, dvs mellan ex 1 och 10
+    $position = $_POST['position'];
+
+
+    $result = $template->insertOne($information, $position);
+
+}
+
+
 // use Database
 // klassen protected - kan inte nå åtkomst
 // Call to protected Database::__construct() from invalid context
 // $database = new Database();
 
-// use Temmplate
-$template = new Template();
 
 $title = "Template";
 
@@ -28,6 +52,19 @@ $title = "Template";
 </head>
 <body>
     
+
+    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+
+
+        <input type="text" name="information" placeholder="Ange information" value="<?= $information ?>">
+        <input type="number" name="position" min="1" max="10" value="<?= $position ?>">
+        <input type="submit" value="Spara till databasen">
+
+
+    </form>
+
+
+
     <?php include ROOT . '/cms-includes/partials/header.php'; ?>
     <?php include ROOT . '/cms-includes/partials/nav.php'; ?>
 
@@ -86,11 +123,25 @@ $title = "Template";
     // print_r2($result);
 
     // testa att skicka parametrar i annan ordning
-    $result = $template->insertOne('Skåne ligger söderut', 3);
-    print_r2($result);
+    // $result = $template->insertOne('Skåne ligger söderut', 3);
+    // print_r2($result);
+
+
+    // delete
+    // $result = $template->deleteOne(9);
+    // print_r2($result);
+
+
+    // update
+    // $result = $template->updateOne(1, 'Sverige är ganska långsträckt');
+    // print_r2($result);
 
 
     $result = $template->selectAll();
+    print_r2($result);
+
+    // order by...
+    $result = $template->selectAllOrderBy('position', true);
     print_r2($result);
 
 

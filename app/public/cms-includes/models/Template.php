@@ -18,7 +18,6 @@ class Template extends Database
 
     // här följer olika exempel där placeholders används för att undvika SQL injections
     
-    // funktion för att lägga till data
     public function selectAll()
     {
         $sql = "SELECT * FROM template";
@@ -27,6 +26,35 @@ class Template extends Database
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    public function selectAllOrderBy($column = 'information', $asc = true)
+    {
+
+        // avoid sql injection building sql query
+        switch ($column) {
+            case 'position':
+                $sql = "SELECT * FROM template ORDER BY position";
+                break;
+            case 'id':
+                $sql = "SELECT * FROM template ORDER BY id";
+                break;
+            default:
+                $sql = "SELECT * FROM template ORDER BY information";
+                break;
+        }
+
+        $order = $asc === true ? 'ASC' : 'DESC';
+        $sql = $sql . " $order"; 
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
 
     // funktion för att lägga till data i tabellen
     public function insertOne($information, $position)
@@ -46,9 +74,30 @@ class Template extends Database
         } catch (\Throwable $th) {
             throw $th;
         }
-
     }
 
+    public function deleteOne($id)
+    {
+        $sql = "DELETE FROM template WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    } 
+
+    public function deleteMany($array)
+    {
+        // ...
+    }
+
+    // updatera
+    public function updateOne($id, $information)
+    {
+        $sql = "UPDATE template SET information = :information WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':information', $information, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
 
 }
 
